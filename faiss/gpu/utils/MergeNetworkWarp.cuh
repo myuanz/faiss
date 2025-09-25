@@ -13,6 +13,10 @@
 #include <faiss/gpu/utils/PtxUtils.cuh>
 #include <faiss/gpu/utils/WarpShuffles.cuh>
 
+#ifdef small  // Cancel the macro definition from Windows/MIDL
+#undef small
+#endif
+
 namespace faiss {
 namespace gpu {
 

@@ -78,7 +78,12 @@ endif()
 ]=])
 endif()
 
-find_package(OpenMP REQUIRED)
+find_package(OpenMP REQUIRED COMPONENTS CXX)
+find_package(OpenMP OPTIONAL_COMPONENTS CUDA)
+if(NOT OpenMP_CUDA_FOUND AND FAISS_ENABLE_GPU)
+	message(WARNING "OpenMP CUDA‐offload not found; building without it.")
+endif()
+
 find_package(GTest CONFIG REQUIRED)
 
 target_link_libraries(faiss_test PRIVATE
